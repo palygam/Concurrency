@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Concurrency</string>
+    <string name="button1">Launch Process</string>
+    <string name="button2">Get Random Number</string>
+    <string name="info_text_view"> </string>
 </resources>
