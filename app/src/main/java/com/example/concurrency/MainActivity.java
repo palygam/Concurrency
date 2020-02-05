@@ -17,7 +17,6 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
-    private Handler handler = new Handler();
     private Button launchProcess;
     private ProgressBar progressBar;
 
@@ -28,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addButtonsMainActivity() {
+        final Handler handler = new Handler();
         launchProcess = findViewById(R.id.button_launch_process);
         progressBar = findViewById(R.id.progress_bar);
         launchProcess.setOnClickListener(new View.OnClickListener() {
