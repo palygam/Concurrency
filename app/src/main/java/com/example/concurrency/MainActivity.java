@@ -17,7 +17,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
-    private Button launchProcess;
+    private Button launchProcessButton;
     private ProgressBar progressBar;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,35 +28,25 @@ public class MainActivity extends AppCompatActivity {
 
     public void addButtonsMainActivity() {
         final Handler handler = new Handler();
-        launchProcess = findViewById(R.id.button_launch_process);
+        launchProcessButton = findViewById(R.id.button_launch_process);
         progressBar = findViewById(R.id.progress_bar);
-        launchProcess.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                progressBar.setVisibility(View.VISIBLE);
-                launchProcess.setEnabled(false);
-                Thread backgroundThread = new Thread(new Runnable() {
-                    public void run() {
-                        sortArray();
-                        handler.post(updateUI);
-                    }
-                });
-                backgroundThread.start();
-            }
+        launchProcessButton.setOnClickListener(v -> {
+            progressBar.setVisibility(View.VISIBLE);
+            launchProcessButton.setEnabled(false);
+            Thread backgroundThread = new Thread(() -> {
+                sortArray();
+                handler.postDelayed(updateUI, 10000);
+            });
+            backgroundThread.start();
         });
 
         Button randomNumber = findViewById(R.id.button_random_number);
-        randomNumber.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getRandomNumber();
-            }
-        });
+        randomNumber.setOnClickListener(v -> calculateRandomNumber());
     }
 
     private Runnable updateUI = new Runnable() {
         public void run() {
-            launchProcess.setEnabled(true);
+            launchProcessButton.setEnabled(true);
             progressBar.setVisibility(View.INVISIBLE);
             Toast toast = Toast.makeText(MainActivity.this, "Array is sorted", Toast.LENGTH_SHORT);
             toast.show();
@@ -71,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         Arrays.sort(array);
     }
 
-    private void getRandomNumber() {
+    private void calculateRandomNumber() {
         int random = new Random().nextInt(100);
         TextView infoTextView = findViewById(R.id.info_text_view);
         infoTextView.setText(Integer.toString(random));
