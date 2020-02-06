@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
             backgroundThread.start();
         });
 
-        Button randomNumber = findViewById(R.id.button_random_number);
-        randomNumber.setOnClickListener(v -> calculateRandomNumber());
+        Button randomNumberButton = findViewById(R.id.button_random_number);
+        randomNumberButton.setOnClickListener(v -> calculateRandomNumber());
     }
 
     private Runnable updateUI = new Runnable() {
